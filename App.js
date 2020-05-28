@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
+import RNFetchBlob from 'rn-fetch-blob';
 
 const PendingView = () => (
   <View
@@ -36,16 +37,15 @@ const App = () => {
   };
 
   const takePicture = async camera => {
-    const options = { quality: 0.5, base64: false, notToSave: true };
+    const options = { quality: 1 };
     const data = await camera.takePictureAsync(options);
+
+    // CameraRoll --> 최초 1회 Permission 요구, Permission.request(~~)
     if (Platform.OS === 'android') {
       console.log('Platform.OS : ', Platform.OS);
       await checkAndroidPermission();
     }
-    // ex) file:///data/user/0/com.rncamera/cache/Camera/80f99d78-03ee-4304-9270-eb2381763984.jpg
-    // CameraRoll.save(data.uri);
     CameraRoll.save(data.uri, 'photo');
-    console.log(data.uri);
   };
 
   return (
