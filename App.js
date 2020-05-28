@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
-import RNFetchBlob from 'rn-fetch-blob';
 
 const PendingView = () => (
   <View
